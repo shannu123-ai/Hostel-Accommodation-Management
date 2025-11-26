@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hostel Accommodation Management System - ITP Project</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0f172a;
+            overflow: hidden;
+        }
+        
+        .slide-container {
+            display: flex;
+            height: 100vh;
+            position: relative;
+        }
+        
+        .slide {
+            display: none;
+            width: 100%;
+            height: 100%;
+            padding: 60px;
+            color: #f1f5f9;
+            animation: slideIn 0.8s ease-in-out;
+            overflow-y: auto;
+        }
+        
+        .slide.active { display: flex; flex-direction: column; justify-content: center; }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .slide.title-slide {
+            background: linear-gradient(135deg, #1a3a1a 0%, #2d5a2d 100%);
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .slide.content-slide {
+            background: linear-gradient(135deg, #0f172a 0%, #1a1f35 100%);
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #4ade80;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            animation: fadeInDown 0.8s ease-out;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            color: #4ade80;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #4ade80;
+            padding-bottom: 15px;
+            animation: fadeInUp 0.8s ease-out 0.2s backwards;
+        }
+        
+        h3 {
+            font-size: 1.8rem;
+            color: #86efac;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        
+        p, li {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            color: #cbd5e1;
+            animation: fadeInUp 0.8s ease-out 0.4s backwards;
+        }
+        
+        .subtitle {
+            font-size: 1.8rem;
+            color: #cbd5e1;
+            margin-top: 30px;
+        }
+        
+        .meta {
+            font-size: 1rem;
+            color: #94a3b8;
+            margin-top: 50px;
+        }
+        
+        ul, ol {
+            margin-left: 30px;
+            margin-top: 15px;
+        }
+        
+        li {
+            margin-bottom: 12px;
+            list-style-position: inside;
+        }
+        
+        .feature-box {
+            background: rgba(30, 41, 59, 0.8);
+            border-left: 4px solid #4ade80;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 4px;
+            animation: fadeInLeft 0.8s ease-out 0.3s backwards;
+        }
+        
+        .code-block {
+            background: #1e293b;
+            border: 1px solid #4ade80;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            color: #86efac;
+        }
+        
+        .button-group {
+            margin-top: 40px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        button {
+            background: #4ade80;
+            color: #0f172a;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        button:hover {
+            background: #86efac;
+            transform: scale(1.05);
+        }
+        
+        button:active { transform: scale(0.95); }
+        
+        .slide-counter {
+            position: fixed;
+            bottom: 20px;
+            right: 30px;
+            font-size: 1.1rem;
+            color: #4ade80;
+            font-weight: 600;
+        }
+        
+        .nav-hint {
+            position: fixed;
+            bottom: 20px;
+            left: 30px;
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+        
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .highlight {
+            color: #86efac;
+            font-weight: 600;
+        }
+        
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        .column {
+            animation: fadeInUp 0.8s ease-out 0.3s backwards;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <!-- Slide 1: Title -->
+        <div class="slide title-slide active">
+            <div>
+                <h1>🏢 Hostel Accommodation Management System</h1>
+                <p class="subtitle">Student Room Allocation with C Structures</p>
+                <p class="meta">ITP Course Project • SAI University, Chennai</p>
+            </div>
+        </div>
+
+        <!-- Slide 2: Introduction -->
+        <div class="slide content-slide">
+            <h2>What is Hostel Accommodation?</h2>
+            <p>A system that manages student records and their room assignments in a hostel facility.</p>
+            <div class="feature-box">
+                <h3>Real-World Applications</h3>
+                <ul>
+                    <li>University hostel management</li>
+                    <li>Residential college room allocation</li>
+                    <li>PG accommodation tracking</li>
+                    <li>Corporate housing systems</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 3: Problem Statement -->
+        <div class="slide content-slide">
+            <h2>The Challenge</h2>
+            <p>Manual hostel management is:</p>
+            <ul>
+                <li>❌ Error-prone (duplicate entries, lost records)</li>
+                <li>❌ Time-consuming (manual searching)</li>
+                <li>❌ Disorganized (no central system)</li>
+                <li>❌ Difficult to scale (many students)</li>
+            </ul>
+            <p style="margin-top: 30px;"><span class="highlight">Solution:</span> Automated system using arrays and structures for efficient management.</p>
+        </div>
+
+        <!-- Slide 4: Solution Overview -->
+        <div class="slide content-slide">
+            <h2>Our Solution</h2>
+            <p>A <span class="highlight">simple, effective</span> Hostel Management System in C</p>
+            <ul>
+                <li>✓ Add student records with ID, name, room</li>
+                <li>✓ View all students in organized list</li>
+                <li>✓ Search for student by ID</li>
+                <li>✓ User-friendly menu interface</li>
+                <li>✓ Stores up to 100 students in memory</li>
+            </ul>
+        </div>
+
+        <!-- Slide 5: Core Features -->
+        <div class="slide content-slide">
+            <h2>Main Features</h2>
+            <div class="feature-box">
+                <h3>Add Student</h3>
+                <p>Enter student ID, name, and room number to register new student</p>
+            </div>
+            <div class="feature-box">
+                <h3>Display Students</h3>
+                <p>View all registered students with their details in a table</p>
+            </div>
+            <div class="feature-box">
+                <h3>Search Student</h3>
+                <p>Find a specific student by ID to check room assignment</p>
+            </div>
+        </div>
+
+        <!-- Slide 6: Data Structure -->
+        <div class="slide content-slide">
+            <h2>Struct Design</h2>
+            <div class="code-block">
+struct Student {<br>
+&nbsp;&nbsp;int id;           // Student ID<br>
+&nbsp;&nbsp;char name[50];    // Student name<br>
+&nbsp;&nbsp;int room;         // Room number<br>
+};
+            </div>
+            <p style="margin-top: 20px;">Simple, efficient structure for storing essential student information.</p>
+        </div>
+
+        <!-- Slide 7: Array Storage -->
+        <div class="slide content-slide">
+            <h2>Memory Management</h2>
+            <div class="code-block">
+struct Student hostel[100];   // Array of 100 students<br>
+int count = 0;                // Current student count
+            </div>
+            <ul style="margin-top: 20px;">
+                <li>Stores up to 100 student records</li>
+                <li>Count variable tracks actual records</li>
+                <li>In-memory storage (data lost on exit)</li>
+                <li>Simple array access for fast retrieval</li>
+            </ul>
+        </div>
+
+        <!-- Slide 8: Core Functions -->
+        <div class="slide content-slide">
+            <h2>Key Functions</h2>
+            <div class="feature-box">
+                <h3>addStudent()</h3>
+                <p>Accepts student details and adds to array</p>
+            </div>
+            <div class="feature-box">
+                <h3>displayStudents()</h3>
+                <p>Loops through array to show all records</p>
+            </div>
+            <div class="feature-box">
+                <h3>searchStudent()</h3>
+                <p>Linear search to find student by ID</p>
+            </div>
+        </div>
+
+        <!-- Slide 9: Program Flow -->
+        <div class="slide content-slide">
+            <h2>Execution Flow</h2>
+            <ol>
+                <li>Initialize empty student array</li>
+                <li>Display menu with 4 options</li>
+                <li>Get user choice</li>
+                <li>Execute selected operation:
+                    <ul style="margin-top: 10px;">
+                        <li>Add → Collect input → Store in array → Confirm</li>
+                        <li>Display → Loop array → Print all records</li>
+                        <li>Search → Compare IDs → Show result</li>
+                        <li>Exit → Terminate program</li>
+                    </ul>
+                </li>
+                <li>Loop until user exits</li>
+            </ol>
+        </div>
+
+        <!-- Slide 10: Menu Interface -->
+        <div class="slide content-slide">
+            <h2>User Menu</h2>
+            <div class="code-block">
+--- Hostel Accommodation Management ---<br>
+1. Add Student<br>
+2. Display Students<br>
+3. Search Student<br>
+4. Exit<br>
+Enter your choice:
+            </div>
+            <p style="margin-top: 20px;">Clear, intuitive options for easy navigation!</p>
+        </div>
+
+        <!-- Slide 11: Sample Execution -->
+        <div class="slide content-slide">
+            <h2>Sample Data</h2>
+            <p>Example student records stored in system:</p>
+            <div class="code-block">
+ID: 101, Name: Aarav Singh, Room: 201<br>
+ID: 102, Name: Priya Sharma, Room: 202<br>
+ID: 103, Name: Rohan Patel, Room: 203<br>
+ID: 104, Name: Sneha Das, Room: 204<br>
+ID: 105, Name: Arjun Kumar, Room: 205
+            </div>
+        </div>
+
+        <!-- Slide 12: Compilation -->
+        <div class="slide content-slide">
+            <h2>How to Run</h2>
+            <h3>Compile:</h3>
+            <div class="code-block">
+gcc Hostel-Accomodation-Mnagement.c -o hostel_management
+            </div>
+            <h3>Run:</h3>
+            <div class="code-block">
+./hostel_management
+            </div>
+            <p style="margin-top: 20px;">Standard C with no external dependencies!</p>
+        </div>
+
+        <!-- Slide 13: C Programming Concepts -->
+        <div class="slide content-slide">
+            <h2>Skills Demonstrated</h2>
+            <div class="two-column">
+                <div class="column">
+                    <h3>Structures</h3>
+                    <p>Custom data types with multiple fields</p>
+                </div>
+                <div class="column">
+                    <h3>Arrays</h3>
+                    <p>Dynamic collection of student records</p>
+                </div>
+                <div class="column">
+                    <h3>Functions</h3>
+                    <p>Modular code with specific tasks</p>
+                </div>
+                <div class="column">
+                    <h3>Menu-Driven Programming</h3>
+                    <p>User interaction and choice handling</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 14: Search Algorithm -->
+        <div class="slide content-slide">
+            <h2>Search Logic</h2>
+            <h3>Linear Search Implementation:</h3>
+            <ol>
+                <li>Accept student ID from user</li>
+                <li>Loop through hostel array</li>
+                <li>Compare each student's ID</li>
+                <li>If match found → display details</li>
+                <li>If not found → show error message</li>
+            </ol>
+            <p style="margin-top: 20px;"><span class="highlight">Time Complexity:</span> O(n) for worst case</p>
+        </div>
+
+        <!-- Slide 15: Learning Outcomes -->
+        <div class="slide content-slide">
+            <h2>Learning Outcomes</h2>
+            <ul>
+                <li>Understanding structure definitions and usage</li>
+                <li>Working with arrays of structures</li>
+                <li>Implementing menu-driven programs</li>
+                <li>File I/O concepts (future extension)</li>
+                <li>Basic searching and data management</li>
+                <li>User input validation basics</li>
+            </ul>
+        </div>
+
+        <!-- Slide 16: Future Enhancements -->
+        <div class="slide content-slide">
+            <h2>Possible Extensions</h2>
+            <ul>
+                <li>Save/load data from file (persistence)</li>
+                <li>Update student details (edit functionality)</li>
+                <li>Delete student records</li>
+                <li>Check for duplicate IDs</li>
+                <li>Room availability checking</li>
+                <li>Generate occupancy reports</li>
+                <li>Sort students by ID or name</li>
+            </ul>
+        </div>
+
+        <!-- Slide 17: Conclusion -->
+        <div class="slide content-slide">
+            <h2>Key Takeaways</h2>
+            <p>This project demonstrates how basic C programming constructs can solve practical hostel management needs.</p>
+            <div class="feature-box">
+                <h3>Achievement</h3>
+                <p>Built a <span class="highlight">functional student management system</span> using structures, arrays, functions, and menu-driven design.</p>
+            </div>
+        </div>
+
+        <!-- Slide 18: Q&A -->
+        <div class="slide title-slide">
+            <div>
+                <h1>Questions?</h1>
+                <p class="subtitle">Ready to discuss implementation details</p>
+                <p class="meta">Hostel Accommodation System • ITP Project</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav-hint">Press ← → or Click buttons to navigate</div>
+    <div class="slide-counter"><span id="current">1</span> / <span id="total">18</span></div>
+
+    <div class="button-group">
+        <button onclick="previousSlide()">← Previous</button>
+        <button onclick="nextSlide()">Next →</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        
+        document.getElementById('total').textContent = totalSlides;
+        
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            document.getElementById('current').textContent = currentSlide + 1;
+        }
+        
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+        
+        function previousSlide() {
+            showSlide(currentSlide - 1);
+        }
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') previousSlide();
+        });
+    </script>
+</body>
+</html>
