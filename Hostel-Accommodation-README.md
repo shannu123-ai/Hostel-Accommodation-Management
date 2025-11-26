@@ -120,6 +120,7 @@ struct Student {
 This mini-project demonstrates how structures and arrays in C can be used to build a simple hostel management tool. It is suitable for an introductory programming course and can be extended later with features such as file storage, update/delete operations, and validation for duplicate IDs.
 
 ## Author
+Kesamsetty. Shanmukha Lakshmi
 
 *ITP Project*  
 *SAI University, Chennai*
