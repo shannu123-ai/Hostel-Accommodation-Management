@@ -1,76 +1,72 @@
-# Hostel Accommodation Management in C
+# Hostel Accommodation Management
 
-## Overview
-This project implements a simple Hostel Accommodation Management System using the C programming language. It allows the warden or administrator to add hostel students, display the full list, and search for a student by ID through a menu-driven console interface. [attached_file:file:11]
+## Introduction
+The Hostel Accommodation Management System is a console-based application developed in C to manage basic information about hostel students. The system allows users to store, view, and search student records efficiently using a simple text-based menu. [attached_file:file:11]
 
-## Objectives
-- Practice defining and using struct types in C.
-- Store multiple records in a global array and access them by index.
-- Build a menu-driven application using loops and switch statements.
-- Implement basic search functionality on a collection of records. [attached_file:file:11]
+## Purpose
+This project demonstrates core C programming concepts—such as structures, arrays, and modular design—while modelling a real-world scenario of managing hostel room allocations. It focuses on clarity and ease of use so that beginners can understand how data can be organized and processed in memory. [attached_file:file:11]
 
 ## Features
-- Add a new hostel student with ID, name, and room number.
-- Display all stored student records in a formatted list.
-- Search for a student by ID and show their details if found.
-- Exit cleanly from the application using the menu. [attached_file:file:11]
 
-## Data Model
-The system uses a struct Student to represent each hostel resident:
+### Add Student
+Allows the user to enter details of a new hostel student, including:
+- Student ID  
+- Student name  
+- Room number  
 
-- id – unique student ID (integer)  
-- name – student name (character array of size 50)  
-- room – room number allocated to the student (integer)  
+The record is stored in an in-memory array, and a confirmation message is displayed once the student is added successfully. [attached_file:file:11]
 
-All records are stored in a global array hostel[100] with an integer count to track how many students have been added so far. [attached_file:file:11]
+### Display Students
+Shows all stored student records in a simple list format. For each student, the program prints:
+- ID  
+- Name  
+- Room number  
 
-## Main Components
+This helps the user quickly review the current hostel occupancy. [attached_file:file:11]
 
-### addStudent()
-- Prompts the user for student ID, name, and room number.
-- Stores the details in a temporary struct Student variable.
-- Copies that struct into hostel[count] and increments count.
-- Prints “Student added successfully!” after insertion. [attached_file:file:11]
+### Search Student
+Enables the user to search for a student by entering their ID. The program scans the array of students and:
+- Prints “Student Found!” with the student’s name and room number if the ID exists.
+- Prints “Student not found!” if there is no matching record. [attached_file:file:11]
 
-### displayStudents()
-- Prints a header --- Hostel Student List ---.
-- Iterates from index 0 to count - 1 and prints the ID, name, and room of each student. [attached_file:file:11]
+## Programming Requirements
+- ANSI C standard
+- Use of a struct to represent each student
+- Use of a global array to store multiple students
+- Modularized code with separate functions for add, display, and search
+- No external libraries required beyond the C standard library [attached_file:file:11]
 
-### searchStudent()
-- Asks the user to enter a student ID to search.
-- Scans the hostel array linearly.
-- If a record with matching ID is found, prints “Student Found!” along with the student’s name and room number and returns.
-- If no match is found, prints “Student not found!”. [attached_file:file:11]
+## How To Use
 
-### main()
-- Repeatedly displays the menu:
+1. Compile the program:
+## How To Use
 
-  1. Add Student  
-  2. Display Students  
-  3. Search Student  
-  4. Exit  
+1. Compile the program:
+   ``` bash
+    gcc Hostel_accommodation_Management.c
+   ``` 
+2. Run it in the terminal:
+  ```  bash
+    ./a.exe
+```
+    ## Screenshots
 
-- Reads the user’s choice and calls addStudent, displayStudents, or searchStudent as appropriate.
-- Exits the program when option 4 is chosen; otherwise keeps looping and accepting operations. [attached_file:file:11]
+- Adding a student  
+  ![Add student](screenshots/add_student.png)
 
-## Limitations and Assumptions
-- A maximum of 100 students can be stored because the array size is fixed at 100.
-- Data is stored only in memory; once the program is closed, all records are lost (no file handling yet).
-- No duplicate‐ID check is performed, so the user must manually avoid repeating IDs. [attached_file:file:11]
+- Displaying all students  
+  ![Display students](screenshots/display_students.png)
 
-## How to Compile and Run
+- Searching for a student (found)  
+  ![Search student found](screenshots/search_student_found.png)
 
-1. Save the source code as Hostel-Accomodation-Mnagement-1.c.
-2. Open a terminal in the project folder and compile:
+- Exiting from the main menu  
+  ![Menu and exit](screenshots/menu_exit.png)
 
-## Conclusion
-
-This mini-project demonstrates how structures and arrays in C can be used to build a simple hostel management tool. It is suitable for an introductory programming course and can be extended later with features such as file storage, update/delete operations, and validation for duplicate IDs.
+  ## Conclusion
+This Hostel Accommodation Management application shows how basic data management tasks—such as inserting, listing, and searching records—can be implemented using structures and arrays in C. It serves as a compact example for students learning how to design menu-driven programs and manipulate collections of structured data. [attached_file:file:11]
 
 ## Author
-Kesamsetty. Shanmukha Lakshmi
-
-*ITP Project*  
-*SAI University, Chennai*
-
----
+<shannu>  
+ITP Project  
+SAI University, Chennai
