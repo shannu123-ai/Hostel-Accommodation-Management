@@ -1,119 +1,67 @@
-# Hostel Accommodation Management System
+# Hostel Accommodation Management in C
 
-## Introduction
+## Overview
+This project implements a simple Hostel Accommodation Management System using the C programming language. It allows the warden or administrator to add hostel students, display the full list, and search for a student by ID through a menu-driven console interface. [attached_file:file:11]
 
-The Hostel Accommodation Management System is a basic console-based application written in C to manage students staying in a hostel. It allows the user to add student records, view the list of all students, and search for a student using their ID.
-
-## Purpose
-
-The main aim of this project is to practice core C programming concepts such as structures, arrays, functions, and menu-driven programs using a real-life example of hostel room allocation. It provides a simple starting point for understanding how data about students and rooms can be organized in memory.
+## Objectives
+- Practice defining and using struct types in C.
+- Store multiple records in a global array and access them by index.
+- Build a menu-driven application using loops and switch statements.
+- Implement basic search functionality on a collection of records. [attached_file:file:11]
 
 ## Features
+- Add a new hostel student with ID, name, and room number.
+- Display all stored student records in a formatted list.
+- Search for a student by ID and show their details if found.
+- Exit cleanly from the application using the menu. [attached_file:file:11]
 
-### Add Student
+## Data Model
+The system uses a struct Student to represent each hostel resident:
 
-Stores a new student's ID, name, and room number in an in-memory list and confirms successful addition.
+- id – unique student ID (integer)  
+- name – student name (character array of size 50)  
+- room – room number allocated to the student (integer)  
 
-### Display Students
+All records are stored in a global array hostel[100] with an integer count to track how many students have been added so far. [attached_file:file:11]
 
-Prints all stored student records in a readable format, including ID, name, and room number.
+## Main Components
 
-### Search Student
+### addStudent()
+- Prompts the user for student ID, name, and room number.
+- Stores the details in a temporary struct Student variable.
+- Copies that struct into hostel[count] and increments count.
+- Prints “Student added successfully!” after insertion. [attached_file:file:11]
 
-Lets the user search for a student by ID and shows the corresponding name and room if found; otherwise displays a "not found" message.
+### displayStudents()
+- Prints a header --- Hostel Student List ---.
+- Iterates from index 0 to count - 1 and prints the ID, name, and room of each student. [attached_file:file:11]
 
-### Exit
+### searchStudent()
+- Asks the user to enter a student ID to search.
+- Scans the hostel array linearly.
+- If a record with matching ID is found, prints “Student Found!” along with the student’s name and room number and returns.
+- If no match is found, prints “Student not found!”. [attached_file:file:11]
 
-Closes the program from the main menu safely.
+### main()
+- Repeatedly displays the menu:
 
-## Implementation Details
+  1. Add Student  
+  2. Display Students  
+  3. Search Student  
+  4. Exit  
 
-### Data Structure
+- Reads the user’s choice and calls addStudent, displayStudents, or searchStudent as appropriate.
+- Exits the program when option 4 is chosen; otherwise keeps looping and accepting operations. [attached_file:file:11]
 
-- Uses a `struct Student` with the following fields:
-  - `int id` – unique student ID
-  - `char name[50]` – student name
-  - `int room` – allocated room number
-  
-- An array `hostel[100]` stores up to 100 student records, and a global `count` variable tracks how many students are currently stored.
-
-### Core Functions
-
-- `addStudent()` – Reads student ID, name, and room from the user and appends the record to the `hostel` array.
-- `displayStudents()` – Loops through all stored records and prints each student's details.
-- `searchStudent()` – Searches for a student by ID and displays their name and room if found.
-- `main()` – Implements an infinite loop with a menu to call the appropriate function based on the user's choice.
-
-**Note:** This version stores all data in memory only and does not use files, so data is lost when the program exits.
+## Limitations and Assumptions
+- A maximum of 100 students can be stored because the array size is fixed at 100.
+- Data is stored only in memory; once the program is closed, all records are lost (no file handling yet).
+- No duplicate‐ID check is performed, so the user must manually avoid repeating IDs. [attached_file:file:11]
 
 ## How to Compile and Run
 
-1. Save the program as `Hostel-Accomodation-Mnagement.c`.
-
-2. Compile with a C compiler such as GCC:
-   ```bash
-   gcc Hostel-Accomodation-Mnagement.c -o hostel_management
-   ```
-
-3. Run the executable:
-   ```bash
-   ./hostel_management
-   ```
-
-4. Use the menu to:
-   - Add new students
-   - Display the list of students
-   - Search for a student by ID
-   - Exit the program
-
-## Sample Menu
-
-```text
---- Hostel Accommodation Management ---
-1. Add Student
-2. Display Students
-3. Search Student
-4. Exit
-Enter your choice:
-```
-
-## Sample Data Structure
-
-```c
-struct Student {
-    int id;           // Unique student identifier
-    char name[50];    // Student full name
-    int room;         // Hostel room number
-};
-```
-
-## Program Flow
-
-1. Initialize an empty array to store student records
-2. Display main menu with 4 options
-3. Process user choice:
-   - **Option 1:** Accept student ID, name, room → store in array
-   - **Option 2:** Loop through array → display all students
-   - **Option 3:** Accept student ID → search and display details
-   - **Option 4:** Exit program
-4. Loop until user exits
-
-## Limitations & Future Enhancements
-
-**Current Limitations:**
-- Data is stored in memory only (not persistent)
-- Maximum 100 students can be stored
-- No update or delete functionality
-- No duplicate ID checking
-
-**Possible Extensions:**
-- Add file I/O for persistent storage
-- Implement update functionality to modify student details
-- Add delete functionality with confirmation
-- Check for duplicate IDs before adding
-- Generate hostel reports (occupancy rate, student list by room)
-- Add room availability management
-- Create fee tracking system
+1. Save the source code as Hostel-Accomodation-Mnagement-1.c.
+2. Open a terminal in the project folder and compile:
 
 ## Conclusion
 
